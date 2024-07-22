@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            font-size: 62.5%;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            height: auto;
+
+        }
+
+        .btn_toggle {
+            position: absolute;
+            width: 15rem;
+            height: 4rem;
+            font-size: 2rem;
+            font-weight: 200;
+            z-index: 1;
+            border: none;
+            margin-top: 3rem;
+            cursor: pointer;
+            background-color: black;
+            color: white;
+            outline: 2px groove black;
+            outline-offset: 5px;
+        }
+
+        .form-mainSection {
+            margin-top: 10rem;
+            margin-bottom: 10rem;
+            /* background-color: aqua; */
+            width: 60rem;
+            height: auto;
+            position: relative;
+            outline: 3px groove black;
+            outline-offset: 5px;
+            border-radius: 3rem;
+            transform-style: preserve-3d;
+
+        }
+
+        .form_section {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 11111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5rem;
+            font-weight: 1000;
+            background-color: blueviolet;
+            border-radius: 3rem;
+            transform-style: preserve-3d;
+            transform: perspective(100rem);
+            /* backface-visibility: hidden; */
+            transition: 2s;
+            transform-origin: left;
+
+            & h1 {
+                font-size: 5rem;
+                font-weight: 1000;
+                transform: translateZ(100px) translateX(-30px);
+            }
+
+        }
+
+        #turn {
+            transform: perspective(1000px) rotateY(-180deg);
+        }
+
+        #turn_back {
+            transform: perspective(1000px) rotateY(180deg);
+        }
+
+
+        .form {
+            width: 100%;
+            /* outline: 3px groove black;
+    outline-offset: 5px;
+    border-radius: 3rem; */
+        }
+
+        .sub_section {
+            display: flex;
+            padding: 2rem;
+            justify-content: space-between;
+
+            & h1 {
+                font-size: 4rem;
+                font-weight: 1000;
+            }
+
+            & i {
+                font-size: 4rem;
+                font-weight: 1000;
+            }
+        }
+
+        .inpur-field {
+            padding: 2rem;
+            padding-bottom: 3rem;
+
+            & .Sub-Section2 {
+                outline: 3px groove black;
+                outline-offset: 5px;
+
+                & i {
+                    font-size: 2rem;
+                }
+            }
+
+            & input {
+                width: 70%;
+                font-size: 1.6rem;
+                padding: 1rem;
+                border: none;
+                outline: none;
+            }
+
+            & .btn {
+                width: 22.5%;
+                font-size: 1.6rem;
+                padding: 1rem;
+                cursor: pointer;
+            }
+        }
+
+        .display {
+            padding: 2rem;
+
+            & ul {
+                width: 100%;
+                /* background-color: aquamarine; */
+                list-style-type: none;
+                outline: 3px groove black;
+                outline-offset: 5px;
+                border-radius: 3rem;
+                margin: 2.5rem 0;
+
+                & li {
+                    font-size: 3rem;
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 1rem;
+
+                    & span {
+                        width: 45rem;
+                        /* background-color: aqua; */
+                    }
+
+                    & i {
+                        font-size: 2rem;
+                        margin-right: 1.5rem;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <button onclick="toggleFlip()" class="btn_toggle" id="Btn_toggle">OPEN</button>
+    <Section class="form-mainSection">
+        <div class="form_section" id="formsection">
+            <h1>OPEN</h1>
+        </div>
+        <form class="form">
+            <div class="sub_section">
+                <h1 class="heading"> Todo List</h1>
+                <i class="fa-solid fa-file-lines"></i>
+            </div>
+            <div class="inpur-field">
+                <div class="Sub-Section2">
+                    <i class="fa-solid fa-magnifying-glass"></i><input type="text" placeholder="Add todo text"
+                        id="forminput">
+                    <button type="button" class="btn" id="inputfieldBtn">Add</button>
+                </div>
+            </div>
+            <div class="display" id="records">
+                <!-- <ul class="sub_section3">
+                    <li class="Todo-list"><span>Task 1</span>
+                        <div><i class="fa-solid fa-pen-to-square"></i><i class="fa-solid fa-trash"></i></div>
+                    </li>
+                </ul> -->
+            </div>
+        </form>
+    </Section>
+    <script>
+        //Start animation
+        function toggleFlip() {
+            let flipcard = document.getElementById("formsection");
+            let btn = document.getElementById('Btn_toggle');
+            if (flipcard) {
+                flipcard.id = "turn";
+                btn.innerHTML = "CLOSE"
+            } else {
+                flipcard = document.getElementById("turn");
+                flipcard.id = "formsection";
+                btn.innerHTML = "OPEN"
+            }
+        }
+        //End Animation
+
+        const forminput = document.getElementById("forminput");
+        const inputfieldBtn = document.getElementById("inputfieldBtn");
+        const recordsinfo = document.getElementById('records');
+        const inputfieldBtnText = inputfieldBtn.innerText;
+        let editbtn = null;
+        let arrData = [];
+
+        let objstr = localStorage.getItem('user');
+        if (objstr != null) {
+            arrData = JSON.parse(objstr);
+        }
+
+        inputfieldBtn.onclick = () => {
+            let todoListdata = forminput.value;
+            if (editbtn != null) {
+                arrData.splice(editbtn, 1, { 'name': todoListdata });
+                addInfo();
+                editbtn = null;
+            } else {
+
+                arrData.push({ 'name': todoListdata });
+            }
+            addInfo(arrData);
+            forminput.value = "";
+            displayInfo();
+            inputfieldBtn.innerText = inputfieldBtnText;
+
+        }
+
+        function addInfo(arrData) {
+            let strData = JSON.stringify(arrData);
+            localStorage.setItem('user', strData);
+            displayInfo();
+        }
+
+        function displayInfo() {
+            let statement = '';
+            arrData.forEach((users, index) => {
+                statement += `<ul class="sub_section3">
+                    <li class="Todo-list"><span>${users.name}</span>
+                        <div><i class="fa-solid fa-pen-to-square" onclick="editInfo(${index})"></i><i class="fa-solid fa-trash" onclick="deleteInfo(${index})"></i></div>
+                    </li>
+                </ul>`;
+            });
+            recordsinfo.innerHTML = statement;
+        }
+
+        function editInfo(id) {
+            // edit logic
+            editbtn = id;
+            forminput.value = arrData[id].name;
+            inputfieldBtn.innerText = "Save";
+            forminput.focus();
+        }
+
+        function deleteInfo(id) {
+            arrData.splice(id, 1);
+            addInfo(arrData);
+            displayInfo();
+        }
+
+
+    </script>
+</body>
+
+</html>
